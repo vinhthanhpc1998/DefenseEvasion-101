@@ -8,4 +8,4 @@ Các vấn đề của Mimikatz:
 - Bị hạn chế bởi các cơ chế bảo vệ như Credential Guard và LSA Protection.
 - Khả năng tương thích có thể bị ảnh hưởng bởi các bản cập nhật Windows.
 
-# 
+# Troubleshoot
