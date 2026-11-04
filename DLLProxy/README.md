@@ -31,6 +31,7 @@ Bước 2: Phân tích hành vi của file exe đã được kí
 Tôi sử dụng Procmon để theo giõi hành động của GUP.exe.
 
 Bước 3: Phân tích file DLL được load 
+sử dụng Procmon và áp dụng các filter và tìm ra nơi mà DLL được load
 
 Bước 4: Tạo file DLL Proxy 
 
