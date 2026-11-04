@@ -7,3 +7,5 @@ Các vấn đề của Mimikatz:
 - Một số chức năng yêu cầu quyền Administrator hoặc SYSTEM.
 - Bị hạn chế bởi các cơ chế bảo vệ như Credential Guard và LSA Protection.
 - Khả năng tương thích có thể bị ảnh hưởng bởi các bản cập nhật Windows.
+
+# 
