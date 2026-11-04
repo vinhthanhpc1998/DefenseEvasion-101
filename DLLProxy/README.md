@@ -15,8 +15,15 @@ DLL Side-Loading là kỹ thuật lợi dụng một ứng dụng hợp pháp đ
 # Troubleshoot
 DLL Hijacking là 1 kĩ thuật liên quan mà tôi đã học được trước đó. DLL Side-loading là 1 trường hợp đặc biệt của DLL hijacking. Vậy nên trước khi tìm hiểu về DLL Side-loading thì tôi đã xem lại kiến thức về DLL hijacking trước. 
 ## Giả thuyết 
-- DLL Side-loading là 1 trường hợp của DLL Hijacking, với cùng 1 cơ chế hoạt động là nạp DLL vào 1 chương trình có sẵn trên Windows. Nhưng có một điều là DLL là thư viện được nạp vào các chương trình, vậy nên trong thư viện sẽ có các hàm được chương trình chính đem ra sử dụng, vậy nên sẽ có khả năng bị Crash nếu DLL bị nạp sai. Có 2 phương án để áp dụng: 1 là fake file DLL, 2 là tìm nơi nạp mà không bị crash. Sau đó tôi đã chọn fake file DLL, vì tìm nơi nạp DLL mà không bị crash với 1 chương trình lớn là rất khó, thậm chí là không tìm được. Về fake DLL, tôi đã đặt ra nhiều giả thuyết và tìm nhiều cách khác nhau, rồi tôi thấy DLL Proxy là khả thi nhất. Ta sẽ tạo 1 file DLL trung gian có chứa mã độc, rồi nạp các hàm của DLL gốc vào file DLL trung gian. Với cách này, khi mã độc được nạp vào chương trình, chương trình sẽ không bị crash và mã độc sẽ được kích hoạt.
+DLL Side-loading là 1 trường hợp của DLL Hijacking, với cùng 1 cơ chế hoạt động là nạp DLL vào 1 chương trình có sẵn trên Windows. Nhưng có một điều là DLL là thư viện được nạp vào các chương trình, vậy nên trong thư viện sẽ có các hàm được chương trình chính đem ra sử dụng, vậy nên sẽ có khả năng bị Crash nếu DLL bị nạp sai. Có 2 phương án để áp dụng: 1 là fake file DLL, 2 là tìm nơi nạp mà không bị crash. Sau đó tôi đã chọn fake file DLL, vì tìm nơi nạp DLL mà không bị crash với 1 chương trình lớn là rất khó, thậm chí là không tìm được. Về fake DLL, tôi đã đặt ra nhiều giả thuyết và tìm nhiều cách khác nhau, rồi tôi thấy DLL Proxy là khả thi nhất. Ta sẽ tạo 1 file DLL trung gian có chứa mã độc, rồi nạp các hàm của DLL gốc vào file DLL trung gian. Với cách này, khi mã độc được nạp vào chương trình, chương trình sẽ không bị crash và mã độc sẽ được kích hoạt.
+
+## Time Line tìm kiếm thông tin
+1. Tìm về DLL Hijacking, để ngẫm lại đúng về bản chất và cách thức thực hiện
+2. Tìm kiếm thông tin về Side-loading (Không có quá nhiều thông tin, nhưng biết được có 1 cách gọi khác là DLL Proxy)
+3. Tìm kiếm về DLL Proxy, tìm kiếm về cách thực hiện
+4. Tường tận về thông tin và thực hành
 
 # Step to reproduce
+
 
 # Reference
