@@ -24,6 +24,21 @@ DLL Side-loading là 1 trường hợp của DLL Hijacking, với cùng 1 cơ ch
 4. Tường tận về thông tin và thực hành
 
 # Step to reproduce
+Bước 1: Chọn lấy 1 file exe đã được kí sẵn. 
+Ở đây tôi chọn GUP.exe, một file thuộc chức năng Update của notepad++ 
 
+Bước 2: Phân tích hành vi của file exe đã được kí 
+Tôi sử dụng Procmon để theo giõi hành động của GUP.exe.
+
+Bước 3: Phân tích file DLL được load 
+
+Bước 4: Tạo file DLL Proxy 
+
+Bước 5: Tạo mã độc 
+
+Bước 6: Khởi động chương trình
 
 # Reference
+https://www.ired.team/offensive-security/persistence/dll-proxying-for-persistence
+https://attack.mitre.org/techniques/T1574/001
+https://www.r-tec.net/r-tec-blog-dll-sideloading.html
