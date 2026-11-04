@@ -1,5 +1,7 @@
-# Mô tả kĩ thuật
+# Description
 
-# Các bước thực hiện 
+# Troubleshoot
+
+# Step to reproduce
 
 # Reference
