@@ -24,7 +24,8 @@ DLL Side-loading là 1 trường hợp của DLL Hijacking, với cùng 1 cơ ch
 4. Tường tận về thông tin và thực hành
 
 ## Kết luận: 
-Bản chất DLL side-loading là lợi dụng file đã ký để thực thi file chưa được ký, vậy nên cái chúng ta cần là kích hoạt được mã độc bằng file đã kí mà không bị crash chương trình.
+- Bản chất DLL side-loading là lợi dụng file đã ký để thực thi file chưa được ký, vậy nên cái chúng ta cần là kích hoạt được mã độc bằng file đã kí mà không bị crash chương trình.
+- Cách tốt nhất hiện tại là tạo file DLL trung gian giúp load file DLL gốc và kích hoạt file mã độc
 
 # Step to reproduce
 Bước 1: Chọn lấy 1 file exe đã được kí sẵn. 
