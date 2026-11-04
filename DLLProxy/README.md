@@ -32,8 +32,10 @@ Bước 1: Chọn lấy 1 file exe đã được kí sẵn.
 Ở đây tôi chọn GUP.exe, một file thuộc chức năng Update của notepad++ 
 <img width="811" height="646" alt="image" src="https://github.com/user-attachments/assets/1973f7bb-5c8b-4d0f-8d3e-cb4fd055c640" />
 
-Bước 2: Phân tích hành vi của file exe đã được kí 
+Bước 2: Phân tích hành vi của file exe đã được kí <br>
 Tôi sử dụng Procmon để theo giõi hành động của GUP.exe.
+<img width="773" height="685" alt="image" src="https://github.com/user-attachments/assets/4a814d97-6d44-486e-bb6b-af62aaf7b67f" />
+
 
 Bước 3: Phân tích file DLL được load 
 sử dụng Procmon và áp dụng các filter và tìm ra nơi mà DLL được load
