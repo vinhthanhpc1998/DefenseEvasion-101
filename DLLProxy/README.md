@@ -30,6 +30,7 @@ DLL Side-loading là 1 trường hợp của DLL Hijacking, với cùng 1 cơ ch
 # Step to reproduce
 Bước 1: Chọn lấy 1 file exe đã được kí sẵn. 
 Ở đây tôi chọn GUP.exe, một file thuộc chức năng Update của notepad++ 
+<img width="811" height="646" alt="image" src="https://github.com/user-attachments/assets/1973f7bb-5c8b-4d0f-8d3e-cb4fd055c640" />
 
 Bước 2: Phân tích hành vi của file exe đã được kí 
 Tôi sử dụng Procmon để theo giõi hành động của GUP.exe.
