@@ -25,7 +25,7 @@ Dump Credential của người dùng trên máy, thường sẽ dump từ lsass.
 
 ## Kết luận 
 - Dữ liệu được dump ra sẽ chứa credential của người dùng, nên AV khi đọc được phần này (Signature) sẽ liền xóa đi luôn.
-- Trong trường hợp file dmp bị mã hóa trước khi rơi xuống ổ đĩa thì sao.
+- Cần trả lời câu hỏi: Trong trường hợp file dmp bị mã hóa trước khi rơi xuống ổ đĩa thì sao?
 
 # Step to reproduce 
 
