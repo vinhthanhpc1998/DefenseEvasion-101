@@ -39,6 +39,6 @@ Bước 5: Tạo mã độc
 Bước 6: Khởi động chương trình
 
 # Reference
-https://www.ired.team/offensive-security/persistence/dll-proxying-for-persistence
-https://attack.mitre.org/techniques/T1574/001
-https://www.r-tec.net/r-tec-blog-dll-sideloading.html
+https://www.ired.team/offensive-security/persistence/dll-proxying-for-persistence </br>
+https://attack.mitre.org/techniques/T1574/001 </br>
+https://www.r-tec.net/r-tec-blog-dll-sideloading.html </br>
