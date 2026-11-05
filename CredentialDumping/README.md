@@ -267,19 +267,19 @@ int main(int argc, char* argv[]) {
 }
 ```
 
-Bước 3: Tiến hành thí nghiệm trên môi trường Lab
-Tiến hành dump thành công dưới quyền administrator:
+Bước 3: Tiến hành thí nghiệm trên môi trường Lab </br>
+Tiến hành dump thành công dưới quyền administrator:</br>
 <img width="1021" height="741" alt="image" src="https://github.com/user-attachments/assets/408b0795-e3ab-44af-adb8-269a5b9f8878" />
 
 Sau khi dump thành công, ta sẽ có file dmp bị mã hóa:
 <img width="621" height="375" alt="image" src="https://github.com/user-attachments/assets/37364c68-8f18-4ee2-bdfc-15c43e8dc3dc" />
 
-Sau khi lấy được file dmp, ta sẽ transfer file này về máy Attacker và giải mã rồi tiến hành phân tích data với Pypikatz 
+Sau khi lấy được file dmp, ta sẽ transfer file này về máy Attacker và giải mã rồi tiến hành phân tích data với Pypikatz </br>
 
-Giải mã thành công
+Giải mã thành công </br>
 <img width="493" height="223" alt="image" src="https://github.com/user-attachments/assets/19c96284-5f95-474f-9fa7-c0520b88dd45" />
 
-Phân tích data với Pypikatz và thành công lấy được credential
+Phân tích data với Pypikatz và thành công lấy được credential </br>
 <img width="877" height="648" alt="image" src="https://github.com/user-attachments/assets/59931b36-30b7-4c94-bff6-a3e949501135" />
 
 
