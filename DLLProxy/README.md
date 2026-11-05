@@ -28,55 +28,55 @@ DLL Side-loading là 1 trường hợp của DLL Hijacking, với cùng 1 cơ ch
 - Cách tốt nhất hiện tại là tạo file DLL trung gian giúp load file DLL gốc và kích hoạt file mã độc
 
 # Step to reproduce
-Bước 1: Chọn lấy 1 file exe đã được kí sẵn. 
-Ở đây tôi chọn GUP.exe, một file thuộc chức năng Update của notepad++ 
+Bước 1: Chọn lấy 1 file exe đã được kí sẵn. </br>
+Ở đây tôi chọn GUP.exe, một file thuộc chức năng Update của notepad++ </br>
 <img width="811" height="646" alt="image" src="https://github.com/user-attachments/assets/1973f7bb-5c8b-4d0f-8d3e-cb4fd055c640" />
 
 Bước 2: Phân tích hành vi của file exe đã được kí <br>
-Tôi sử dụng Procmon để theo giõi hành động của GUP.exe.
-Trong ảnh là các filter được áp dụng
+Tôi sử dụng Procmon để theo giõi hành động của GUP.exe. </br>
+Trong ảnh là các filter được áp dụng </br>
 <img width="773" height="685" alt="image" src="https://github.com/user-attachments/assets/4a814d97-6d44-486e-bb6b-af62aaf7b67f" />
 
 
-Bước 3: Phân tích file DLL được load 
-Sau khi áp dụng filter tôi đã tìm ra nơi mà cá thư viện DLL được load, nhưng chương trình đã không thể tìm thấy các DLL này.
+Bước 3: Phân tích file DLL được load </br>
+Sau khi áp dụng filter tôi đã tìm ra nơi mà cá thư viện DLL được load, nhưng chương trình đã không thể tìm thấy các DLL này. </br>
 <img width="1294" height="733" alt="image" src="https://github.com/user-attachments/assets/8c074718-04dc-4e76-a8e3-3ae14658b8d5" />
 
-Bước 4: Tạo mã độc 
-Tôi sử dụng MSFVenom để tạo ra một mẫu mã độc nhỏ
+Bước 4: Tạo mã độc </br>
+Tôi sử dụng MSFVenom để tạo ra một mẫu mã độc nhỏ </br>
 <img width="859" height="193" alt="image" src="https://github.com/user-attachments/assets/cf7e6490-bb85-4ac4-b270-476fc26e1ccc" />
 
 
-Bước 5: Tạo file DLL Proxy 
-Tôi chọn file ncrypt.dll để làm nơi load mã độc
+Bước 5: Tạo file DLL Proxy </br>
+Tôi chọn file ncrypt.dll để làm nơi load mã độc </br>
 <img width="855" height="220" alt="image" src="https://github.com/user-attachments/assets/f7ce16b0-242b-456a-ad52-2ac3a0f227ca" />
 
-Sau khi chọn được nơi load mã độc rồi, tôi sẽ cần phải tìm ra mẫu file ncrypt.dll để tiến hành custom (Ở đây tôi tiếp dùng dùng procmon để filter và tìm ra nơi mà chương trình đã load được ncrypt.dll gốc)
+Sau khi chọn được nơi load mã độc rồi, tôi sẽ cần phải tìm ra mẫu file ncrypt.dll để tiến hành custom (Ở đây tôi tiếp dùng dùng procmon để filter và tìm ra nơi mà chương trình đã load được ncrypt.dll gốc) </br>
 <img width="1288" height="561" alt="image" src="https://github.com/user-attachments/assets/8ea9cca0-7b61-4f62-90a2-aad1dd6800a5" />
 
-Xem các hàm được export bởi ncrypt.dll bằng công cụ dumpbin
+Xem các hàm được export bởi ncrypt.dll bằng công cụ dumpbin </br>
 <img width="1054" height="1449" alt="image" src="https://github.com/user-attachments/assets/5532f5bb-d1de-424a-889b-db36a5fddef7" />
 
-Link các hàm từ DLL gốc đến DLL Proxy
+Link các hàm từ DLL gốc đến DLL Proxy </br>
 <img width="1497" height="1172" alt="image" src="https://github.com/user-attachments/assets/096dc92b-16d4-4f02-8908-05d82ab7e9fd" />
 
-Câu lệnh kích hoạt mã độc
+Câu lệnh kích hoạt mã độc </br>
 <img width="1186" height="409" alt="image" src="https://github.com/user-attachments/assets/f145979f-db6c-4caa-bba6-8e507b21a537" />
 
-Sau khi hoàn thành file mã nguồn của file DLL proxy, ta hoàn toàn có thể build nó thành DLL qua tính năng biên dịch DLL của C/C++
+Sau khi hoàn thành file mã nguồn của file DLL proxy, ta hoàn toàn có thể build nó thành DLL qua tính năng biên dịch DLL của C/C++ </br>
 
-Đổi tên dll gốc thành tmpru3otb.dll để ngụy trang, đổi tên của DLL trung gian thành ncrypt.dll và đặt mã độc tên là payload.bin ở cạnh file ncrypt.dll
+Đổi tên dll gốc thành tmpru3otb.dll để ngụy trang, đổi tên của DLL trung gian thành ncrypt.dll và đặt mã độc tên là payload.bin ở cạnh file ncrypt.dll </br>
 <img width="626" height="92" alt="image" src="https://github.com/user-attachments/assets/39c29a70-3a65-492a-a3a5-67c9516bf5e7" />
 
-Giờ đặt các file này vào trong thư mục load DLL mà bị not found mà chúng ta đã tìm thấy khi phân tích hành vi của GUP.exe 
+Giờ đặt các file này vào trong thư mục load DLL mà bị not found mà chúng ta đã tìm thấy khi phân tích hành vi của GUP.exe </br>
 <img width="797" height="640" alt="image" src="https://github.com/user-attachments/assets/c5efdeca-103c-4919-b812-a2e4cfa06d4c" />
 
 
-Bước 6: Khởi động chương trình
-Khi chương trình khởi chạy, DLL sẽ được load thành công.
+Bước 6: Khởi động chương trình </br>
+Khi chương trình khởi chạy, DLL sẽ được load thành công. </br>
 <img width="1873" height="759" alt="image" src="https://github.com/user-attachments/assets/56d56df0-c49c-4df1-b275-1690c9bf4b8b" />
 
-Và ở phía máy Attacker liền nhận kết nối thành công
+Và ở phía máy Attacker liền nhận kết nối thành công </br>
 <img width="1097" height="1003" alt="image" src="https://github.com/user-attachments/assets/bb6beb3d-84b8-466d-ad1b-d8da1a454c89" />
 
 
