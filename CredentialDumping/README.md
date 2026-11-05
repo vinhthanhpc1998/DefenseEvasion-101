@@ -103,7 +103,7 @@ int main(int argc, char* argv[]) {
 	processEntry.dwSize = sizeof(PROCESSENTRY32);
 
 	if (argc < 2) {
-		fprintf(stderr, "Usage: %s <lsass PID>\n", argv[0]);
+		fprintf(stderr, "Usage: %s < PID>\n", argv[0]);
 		return 1;
 	}
 
@@ -114,7 +114,7 @@ int main(int argc, char* argv[]) {
 	processHandle = OpenProcess(PROCESS_ALL_ACCESS, 0, PID);
 	if (processHandle == NULL) {
 		dbgLastError("OpenProcess");
-		printf("[-] OpenProcess failed. Co the do thieu SeDebugPrivilege hoac PPL.\n");
+		printf("[-] OpenProcess failed. \n");
 		return 1;
 	}
 	printf("[+] OpenProcess OK, handle=0x%p\n", processHandle);
@@ -163,6 +163,7 @@ int main(int argc, char* argv[]) {
 	printf("[*] Done. Cleaning up.\n");
 	CloseHandle(processHandle);
 	return 0;
+}
 }
 ```
 
