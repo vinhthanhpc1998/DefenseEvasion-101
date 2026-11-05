@@ -11,3 +11,17 @@ Các chức năng chính:
 - Có thể hoạt động theo mô hình định kỳ (Callback/Check-in) hoặc duy trì kết nối liên tục.
 - Có kiến trúc modular, cho phép mở rộng chức năng thông qua các handler.
 - Có thể triển khai dưới dạng tiến trình độc lập hoặc thành phần tích hợp trong một ứng dụng khác.
+
+# Troubleshoot
+Tham khảo các nguồn blog trên mạng và Documentation của các C2 Framework có hỗ trợ beacon như Adaptix, Sliver. Sau khi nghiên cứu tài liệu xong thì tải các framework về và thực hành, sau khi thực hành thì dựa trên các tính năng được hỗ trợ mà đoán ra cách thức hoạt động của nó
+
+# Step To Reproduce 
+Bước 1: Viết Beacons với cấu trúc: 
+  - Hàm thứ nhất: Thực thi shellcode 
+  - Hàm thứ hai: Gọi request về C2 Server định kì
+  - Hàm thứ 3 là hàm main 
+
+Bước 2: Viết C2 server 
+- Sử dụng FastAPI để làm backend 
+- Viết tasks Queue 
+- Viết chức năng đẩy task với shellcode 
