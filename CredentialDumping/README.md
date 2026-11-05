@@ -35,7 +35,7 @@ Sau khi tiến hành dump data bằng nhiều cách khác nhau, tôi nhận th�
 Bước 2: 
 Viết tools từ windows API thử nghiệm giả thuyết, là mã hóa dữ liệu trước khi lưu vào ổ đĩa 
 
-'''C/C++ 
+```C/C++
 #include <windows.h>
 #include <DbgHelp.h>
 #include <iostream>
@@ -164,7 +164,7 @@ int main(int argc, char* argv[]) {
 	CloseHandle(processHandle);
 	return 0;
 }
-'''
+```
 
 Bước 3: 
 
