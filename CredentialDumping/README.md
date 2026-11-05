@@ -277,7 +277,7 @@ Sau khi dump thành công, ta sẽ có file dmp bị mã hóa: <br>
 Sau khi lấy được file dmp, ta sẽ transfer file này về máy Attacker và giải mã rồi tiến hành phân tích data với Pypikatz </br>
 
 Giải mã thành công </br>
-![Uploading image.png…]()
+<img width="529" height="334" alt="image" src="https://github.com/user-attachments/assets/9d30cf54-0561-4a15-918d-ce8b9713e19a" />
 
 
 Phân tích data với Pypikatz và thành công lấy được credential </br>
