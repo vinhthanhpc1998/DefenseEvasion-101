@@ -33,7 +33,9 @@ Sau khi tiến hành dump data bằng nhiều cách khác nhau, tôi nhận th�
 <img width="973" height="655" alt="image" src="https://github.com/user-attachments/assets/1f38637f-9e88-452e-a8dd-0c9f1cf04ed0" />
 
 Bước 2: 
-Viết tools từ windows API thử nghiệm giả thuyết, là mã hóa dữ liệu trước khi lưu vào ổ đĩa 
+Viết tools từ windows API thử nghiệm giả thuyết, là mã hóa dữ liệu trước khi lưu vào ổ đĩa </br>
+
+Tham khảo mã nguồn dưới đây:
 
 ```C/C++
 #include <windows.h>
