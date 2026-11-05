@@ -271,7 +271,7 @@ Bước 3: Tiến hành thí nghiệm trên môi trường Lab </br>
 Tiến hành dump thành công dưới quyền administrator:</br>
 <img width="1021" height="741" alt="image" src="https://github.com/user-attachments/assets/408b0795-e3ab-44af-adb8-269a5b9f8878" />
 
-Sau khi dump thành công, ta sẽ có file dmp bị mã hóa:
+Sau khi dump thành công, ta sẽ có file dmp bị mã hóa: <br>
 <img width="621" height="375" alt="image" src="https://github.com/user-attachments/assets/37364c68-8f18-4ee2-bdfc-15c43e8dc3dc" />
 
 Sau khi lấy được file dmp, ta sẽ transfer file này về máy Attacker và giải mã rồi tiến hành phân tích data với Pypikatz </br>
